@@ -18,7 +18,7 @@ public class BaseActivity extends AppCompatActivity {
     private AlertDialog mAlertDialog;
 
 
-    
+
     /**
      * Hide alert dialog if any.
      */

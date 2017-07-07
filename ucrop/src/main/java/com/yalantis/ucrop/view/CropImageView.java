@@ -3,6 +3,7 @@ package com.yalantis.ucrop.view;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Bitmap;
+import android.graphics.Canvas;
 import android.graphics.Matrix;
 import android.graphics.RectF;
 import android.graphics.drawable.Drawable;
@@ -83,6 +84,30 @@ public class CropImageView extends TransformImageView {
                 getImageInputPath(), getImageOutputPath(), getExifInfo());
 
         new BitmapCropTask(getViewBitmap(), imageState, cropParameters, cropCallback).execute();
+    }
+
+
+    public Bitmap crop(){
+        cancelAllAnimations();
+        setImageToWrapCropBounds(false);
+
+        final Bitmap src = mBitmap;
+        final Bitmap.Config srcConfig = src.getConfig();
+        final Bitmap.Config config = srcConfig == null ? Bitmap.Config.ARGB_8888 : srcConfig;
+        final int viewportHeight = (int)mCropRect.height();
+        final int viewportWidth =(int) mCropRect.width();
+
+        final Bitmap dst = Bitmap.createBitmap(viewportWidth, viewportHeight, config);
+
+        Canvas canvas = new Canvas(dst);
+        final int left = (getRight() - viewportWidth) / 2;
+        final int top = (getBottom() - viewportHeight) / 2;
+
+        canvas.translate(-left, -top);
+
+        canvas.drawBitmap(mBitmap, mCurrentImageMatrix, null);
+        return dst;
+
     }
 
     /**

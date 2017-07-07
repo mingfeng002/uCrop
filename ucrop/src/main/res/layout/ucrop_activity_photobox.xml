@@ -49,4 +49,10 @@
 
     </FrameLayout>
 
+
+    <ImageView
+        android:id="@+id/test"
+        android:layout_width="200dp"
+        android:layout_height="200dp"/>
+
 </RelativeLayout>

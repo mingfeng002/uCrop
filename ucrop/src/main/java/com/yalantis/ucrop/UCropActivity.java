@@ -104,6 +104,7 @@ public class UCropActivity extends AppCompatActivity {
     private Bitmap.CompressFormat mCompressFormat = DEFAULT_COMPRESS_FORMAT;
     private int mCompressQuality = DEFAULT_COMPRESS_QUALITY;
     private int[] mAllowedGestures = new int[]{SCALE, ROTATE, ALL};
+    private ImageView test;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -333,6 +334,7 @@ public class UCropActivity extends AppCompatActivity {
     }
 
     private void initiateRootViews() {
+        test=(ImageView)findViewById(R.id.test) ;
         mUCropView = (UCropView) findViewById(R.id.ucrop);
         mGestureCropImageView = mUCropView.getCropImageView();
         mOverlayView = mUCropView.getOverlayView();
@@ -609,20 +611,23 @@ public class UCropActivity extends AppCompatActivity {
         mShowLoader = true;
         supportInvalidateOptionsMenu();
 
-        mGestureCropImageView.cropAndSaveImage(mCompressFormat, mCompressQuality, new BitmapCropCallback() {
+       Bitmap bitmap= mGestureCropImageView.crop();
+        test.setImageBitmap(bitmap);
 
-            @Override
-            public void onBitmapCropped(@NonNull Uri resultUri, int offsetX, int offsetY, int imageWidth, int imageHeight) {
-                setResultUri(resultUri, mGestureCropImageView.getTargetAspectRatio(), offsetX, offsetY, imageWidth, imageHeight);
-                finish();
-            }
-
-            @Override
-            public void onCropFailure(@NonNull Throwable t) {
-                setResultError(t);
-                finish();
-            }
-        });
+//        mGestureCropImageView.cropAndSaveImage(mCompressFormat, mCompressQuality, new BitmapCropCallback() {
+//
+//            @Override
+//            public void onBitmapCropped(@NonNull Uri resultUri, int offsetX, int offsetY, int imageWidth, int imageHeight) {
+//                setResultUri(resultUri, mGestureCropImageView.getTargetAspectRatio(), offsetX, offsetY, imageWidth, imageHeight);
+//                finish();
+//            }
+//
+//            @Override
+//            public void onCropFailure(@NonNull Throwable t) {
+//                setResultError(t);
+//                finish();
+//            }
+//        });
     }
 
     protected void setResultUri(Uri uri, float resultAspectRatio, int offsetX, int offsetY, int imageWidth, int imageHeight) {

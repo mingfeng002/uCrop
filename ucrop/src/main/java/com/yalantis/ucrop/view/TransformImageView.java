@@ -48,7 +48,7 @@ public class TransformImageView extends ImageView {
 
     protected boolean mBitmapDecoded = false;
     protected boolean mBitmapLaidOut = false;
-
+    protected Bitmap mBitmap;
     private int mMaxBitmapSize = 0;
 
     private String mImageInputPath, mImageOutputPath;
@@ -112,9 +112,16 @@ public class TransformImageView extends ImageView {
         return mMaxBitmapSize;
     }
 
+//    @Override
+//    public void setImageBitmap(final Bitmap bitmap) {
+//        setImageDrawable(new FastBitmapDrawable(bitmap));
+//    }
+
+
     @Override
-    public void setImageBitmap(final Bitmap bitmap) {
-        setImageDrawable(new FastBitmapDrawable(bitmap));
+    public void setImageBitmap(Bitmap bm) {
+        mBitmap=bm;
+        super.setImageBitmap(bm);
     }
 
     public String getImageInputPath() {
