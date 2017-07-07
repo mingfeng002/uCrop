@@ -237,9 +237,9 @@ public class SampleActivity extends BaseActivity {
             try {
                 int maxWidth = Integer.valueOf(mEditTextMaxWidth.getText().toString().trim());
                 int maxHeight = Integer.valueOf(mEditTextMaxHeight.getText().toString().trim());
-                if (maxWidth > 0 && maxHeight > 0) {
-                    uCrop = uCrop.withMaxResultSize(maxWidth, maxHeight);
-                }
+//                if (maxWidth > 0 && maxHeight > 0) {
+//                    uCrop = uCrop.withMaxResultSize(maxWidth, maxHeight);
+//                }
             } catch (NumberFormatException e) {
                 Log.e(TAG, "Number please", e);
             }

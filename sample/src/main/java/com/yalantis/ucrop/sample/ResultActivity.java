@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
+import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.net.Uri;
@@ -23,6 +24,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.yalantis.ucrop.UCropActivity;
+import com.yalantis.ucrop.util.BitmapUtils;
 import com.yalantis.ucrop.view.UCropView;
 
 import java.io.File;
@@ -56,7 +59,9 @@ public class ResultActivity extends BaseActivity {
 
         try {
             UCropView uCropView = (UCropView) findViewById(R.id.ucrop);
-            uCropView.getCropImageView().setImageUri(getIntent().getData(), null);
+            Bitmap bitmap = BitmapUtils.safeDecodeStream(getIntent().getData(), (int) (1000 * 1.5f), (int) (1000 * 1.5f), ResultActivity.this);
+            uCropView.getCropImageView().setImageBitmap(bitmap);
+//            uCropView.getCropImageView().setImageUri(getIntent().getData(), null);
             uCropView.getOverlayView().setShowCropFrame(false);
             uCropView.getOverlayView().setShowCropGrid(false);
             uCropView.getOverlayView().setDimmedColor(Color.TRANSPARENT);

@@ -13,11 +13,7 @@ import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 
 import com.yalantis.ucrop.R;
-import com.yalantis.ucrop.callback.BitmapCropCallback;
 import com.yalantis.ucrop.callback.CropBoundsChangeListener;
-import com.yalantis.ucrop.model.CropParameters;
-import com.yalantis.ucrop.model.ImageState;
-import com.yalantis.ucrop.task.BitmapCropTask;
 import com.yalantis.ucrop.util.CubicEasing;
 import com.yalantis.ucrop.util.RectUtils;
 
@@ -65,26 +61,26 @@ public class CropImageView extends TransformImageView {
         super(context, attrs, defStyle);
     }
 
-    /**
-     * Cancels all current animations and sets image to fill crop area (without animation).
-     * Then creates and executes {@link BitmapCropTask} with proper parameters.
-     */
-    public void cropAndSaveImage(@NonNull Bitmap.CompressFormat compressFormat, int compressQuality,
-                                 @Nullable BitmapCropCallback cropCallback) {
-        cancelAllAnimations();
-        setImageToWrapCropBounds(false);
-
-        final ImageState imageState = new ImageState(
-                mCropRect, RectUtils.trapToRect(mCurrentImageCorners),
-                getCurrentScale(), getCurrentAngle());
-
-        final CropParameters cropParameters = new CropParameters(
-                mMaxResultImageSizeX, mMaxResultImageSizeY,
-                compressFormat, compressQuality,
-                getImageInputPath(), getImageOutputPath(), getExifInfo());
-
-        new BitmapCropTask(getViewBitmap(), imageState, cropParameters, cropCallback).execute();
-    }
+//    /**
+//     * Cancels all current animations and sets image to fill crop area (without animation).
+//     * Then creates and executes {@link BitmapCropTask} with proper parameters.
+//     */
+//    public void cropAndSaveImage(@NonNull Bitmap.CompressFormat compressFormat, int compressQuality,
+//                                 @Nullable BitmapCropCallback cropCallback) {
+//        cancelAllAnimations();
+//        setImageToWrapCropBounds(false);
+//
+//        final ImageState imageState = new ImageState(
+//                mCropRect, RectUtils.trapToRect(mCurrentImageCorners),
+//                getCurrentScale(), getCurrentAngle());
+//
+//        final CropParameters cropParameters = new CropParameters(
+//                mMaxResultImageSizeX, mMaxResultImageSizeY,
+//                compressFormat, compressQuality,
+//                getImageInputPath(), getImageOutputPath(), getExifInfo());
+//
+//        new BitmapCropTask(getViewBitmap(), imageState, cropParameters, cropCallback).execute();
+//    }
 
 
     public Bitmap crop(){

@@ -5,7 +5,6 @@ import android.graphics.Bitmap;
 import android.graphics.Matrix;
 import android.graphics.RectF;
 import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.support.annotation.IntRange;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -13,10 +12,6 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.widget.ImageView;
 
-import com.yalantis.ucrop.callback.BitmapLoadCallback;
-import com.yalantis.ucrop.model.ExifInfo;
-import com.yalantis.ucrop.util.BitmapLoadUtils;
-import com.yalantis.ucrop.util.FastBitmapDrawable;
 import com.yalantis.ucrop.util.RectUtils;
 
 /**
@@ -50,9 +45,9 @@ public class TransformImageView extends ImageView {
     protected boolean mBitmapLaidOut = false;
     protected Bitmap mBitmap;
     private int mMaxBitmapSize = 0;
-
-    private String mImageInputPath, mImageOutputPath;
-    private ExifInfo mExifInfo;
+//
+//    private String mImageInputPath, mImageOutputPath;
+//    private ExifInfo mExifInfo;
 
     /**
      * Interface for rotation and scale change notifying.
@@ -95,22 +90,22 @@ public class TransformImageView extends ImageView {
         }
     }
 
-    /**
-     * Setter for {@link #mMaxBitmapSize} value.
-     * Be sure to call it before {@link #setImageURI(Uri)} or other image setters.
-     *
-     * @param maxBitmapSize - max size for both width and height of bitmap that will be used in the view.
-     */
-    public void setMaxBitmapSize(int maxBitmapSize) {
-        mMaxBitmapSize = maxBitmapSize;
-    }
+//    /**
+//     * Setter for {@link #mMaxBitmapSize} value.
+//     * Be sure to call it before {@link #setImageURI(Uri)} or other image setters.
+//     *
+//     * @param maxBitmapSize - max size for both width and height of bitmap that will be used in the view.
+//     */
+//    public void setMaxBitmapSize(int maxBitmapSize) {
+//        mMaxBitmapSize = maxBitmapSize;
+//    }
 
-    public int getMaxBitmapSize() {
-        if (mMaxBitmapSize <= 0) {
-            mMaxBitmapSize = BitmapLoadUtils.calculateMaxBitmapSize(getContext());
-        }
-        return mMaxBitmapSize;
-    }
+//    public int getMaxBitmapSize() {
+//        if (mMaxBitmapSize <= 0) {
+//            mMaxBitmapSize = BitmapLoadUtils.calculateMaxBitmapSize(getContext());
+//        }
+//        return mMaxBitmapSize;
+//    }
 
 //    @Override
 //    public void setImageBitmap(final Bitmap bitmap) {
@@ -124,49 +119,49 @@ public class TransformImageView extends ImageView {
         super.setImageBitmap(bm);
     }
 
-    public String getImageInputPath() {
-        return mImageInputPath;
-    }
+//    public String getImageInputPath() {
+//        return mImageInputPath;
+//    }
+//
+//    public String getImageOutputPath() {
+//        return mImageOutputPath;
+//    }
+//
+//    public ExifInfo getExifInfo() {
+//        return mExifInfo;
+//    }
 
-    public String getImageOutputPath() {
-        return mImageOutputPath;
-    }
-
-    public ExifInfo getExifInfo() {
-        return mExifInfo;
-    }
-
-    /**
-     * This method takes an Uri as a parameter, then calls method to decode it into Bitmap with specified size.
-     *
-     * @param imageUri - image Uri
-     * @throws Exception - can throw exception if having problems with decoding Uri or OOM.
-     */
-    public void setImageUri(@NonNull Uri imageUri, @Nullable Uri outputUri) throws Exception {
-        int maxBitmapSize = getMaxBitmapSize();
-
-        BitmapLoadUtils.decodeBitmapInBackground(getContext(), imageUri, outputUri, maxBitmapSize, maxBitmapSize,
-                new BitmapLoadCallback() {
-
-                    @Override
-                    public void onBitmapLoaded(@NonNull Bitmap bitmap, @NonNull ExifInfo exifInfo, @NonNull String imageInputPath, @Nullable String imageOutputPath) {
-                        mImageInputPath = imageInputPath;
-                        mImageOutputPath = imageOutputPath;
-                        mExifInfo = exifInfo;
-
-                        mBitmapDecoded = true;
-                        setImageBitmap(bitmap);
-                    }
-
-                    @Override
-                    public void onFailure(@NonNull Exception bitmapWorkerException) {
-                        Log.e(TAG, "onFailure: setImageUri", bitmapWorkerException);
-                        if (mTransformImageListener != null) {
-                            mTransformImageListener.onLoadFailure(bitmapWorkerException);
-                        }
-                    }
-                });
-    }
+//    /**
+//     * This method takes an Uri as a parameter, then calls method to decode it into Bitmap with specified size.
+//     *
+//     * @param imageUri - image Uri
+//     * @throws Exception - can throw exception if having problems with decoding Uri or OOM.
+//     */
+//    public void setImageUri(@NonNull Uri imageUri, @Nullable Uri outputUri) throws Exception {
+//        int maxBitmapSize = getMaxBitmapSize();
+//
+//        BitmapLoadUtils.decodeBitmapInBackground(getContext(), imageUri, outputUri, maxBitmapSize, maxBitmapSize,
+//                new BitmapLoadCallback() {
+//
+//                    @Override
+//                    public void onBitmapLoaded(@NonNull Bitmap bitmap, @NonNull ExifInfo exifInfo, @NonNull String imageInputPath, @Nullable String imageOutputPath) {
+//                        mImageInputPath = imageInputPath;
+//                        mImageOutputPath = imageOutputPath;
+//                        mExifInfo = exifInfo;
+//
+//                        mBitmapDecoded = true;
+//                        setImageBitmap(bitmap);
+//                    }
+//
+//                    @Override
+//                    public void onFailure(@NonNull Exception bitmapWorkerException) {
+//                        Log.e(TAG, "onFailure: setImageUri", bitmapWorkerException);
+//                        if (mTransformImageListener != null) {
+//                            mTransformImageListener.onLoadFailure(bitmapWorkerException);
+//                        }
+//                    }
+//                });
+//    }
 
     /**
      * @return - current image scale value.
@@ -208,11 +203,7 @@ public class TransformImageView extends ImageView {
 
     @Nullable
     public Bitmap getViewBitmap() {
-        if (getDrawable() == null || !(getDrawable() instanceof FastBitmapDrawable)) {
-            return null;
-        } else {
-            return ((FastBitmapDrawable) getDrawable()).getBitmap();
-        }
+        return mBitmap;
     }
 
     /**

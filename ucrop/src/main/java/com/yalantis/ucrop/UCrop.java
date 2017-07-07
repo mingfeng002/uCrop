@@ -11,7 +11,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.annotation.ColorInt;
-import android.support.annotation.DrawableRes;
 import android.support.annotation.FloatRange;
 import android.support.annotation.IntRange;
 import android.support.annotation.NonNull;
@@ -46,9 +45,6 @@ public class UCrop {
 
     public static final String EXTRA_ASPECT_RATIO_X = EXTRA_PREFIX + ".AspectRatioX";
     public static final String EXTRA_ASPECT_RATIO_Y = EXTRA_PREFIX + ".AspectRatioY";
-
-    public static final String EXTRA_MAX_SIZE_X = EXTRA_PREFIX + ".MaxSizeX";
-    public static final String EXTRA_MAX_SIZE_Y = EXTRA_PREFIX + ".MaxSizeY";
 
     private Intent mCropIntent;
     private Bundle mCropOptionsBundle;
@@ -93,17 +89,6 @@ public class UCrop {
         return this;
     }
 
-    /**
-     * Set maximum size for result cropped image.
-     *
-     * @param width  max cropped image width
-     * @param height max cropped image height
-     */
-    public UCrop withMaxResultSize(@IntRange(from = 100) int width, @IntRange(from = 100) int height) {
-        mCropOptionsBundle.putInt(EXTRA_MAX_SIZE_X, width);
-        mCropOptionsBundle.putInt(EXTRA_MAX_SIZE_Y, height);
-        return this;
-    }
 
     public UCrop withOptions(@NonNull Options options) {
         mCropOptionsBundle.putAll(options.getOptionBundle());
@@ -247,24 +232,6 @@ public class UCrop {
         public static final String EXTRA_DIMMED_LAYER_COLOR = EXTRA_PREFIX + ".DimmedLayerColor";
         public static final String EXTRA_CIRCLE_DIMMED_LAYER = EXTRA_PREFIX + ".CircleDimmedLayer";
 
-        public static final String EXTRA_SHOW_CROP_FRAME = EXTRA_PREFIX + ".ShowCropFrame";
-        public static final String EXTRA_CROP_FRAME_COLOR = EXTRA_PREFIX + ".CropFrameColor";
-        public static final String EXTRA_CROP_FRAME_STROKE_WIDTH = EXTRA_PREFIX + ".CropFrameStrokeWidth";
-
-        public static final String EXTRA_SHOW_CROP_GRID = EXTRA_PREFIX + ".ShowCropGrid";
-        public static final String EXTRA_CROP_GRID_ROW_COUNT = EXTRA_PREFIX + ".CropGridRowCount";
-        public static final String EXTRA_CROP_GRID_COLUMN_COUNT = EXTRA_PREFIX + ".CropGridColumnCount";
-        public static final String EXTRA_CROP_GRID_COLOR = EXTRA_PREFIX + ".CropGridColor";
-        public static final String EXTRA_CROP_GRID_STROKE_WIDTH = EXTRA_PREFIX + ".CropGridStrokeWidth";
-
-        public static final String EXTRA_TOOL_BAR_COLOR = EXTRA_PREFIX + ".ToolbarColor";
-        public static final String EXTRA_STATUS_BAR_COLOR = EXTRA_PREFIX + ".StatusBarColor";
-        public static final String EXTRA_UCROP_COLOR_WIDGET_ACTIVE = EXTRA_PREFIX + ".UcropColorWidgetActive";
-
-        public static final String EXTRA_UCROP_WIDGET_COLOR_TOOLBAR = EXTRA_PREFIX + ".UcropToolbarWidgetColor";
-        public static final String EXTRA_UCROP_TITLE_TEXT_TOOLBAR = EXTRA_PREFIX + ".UcropToolbarTitleText";
-        public static final String EXTRA_UCROP_WIDGET_CANCEL_DRAWABLE = EXTRA_PREFIX + ".UcropToolbarCancelDrawable";
-        public static final String EXTRA_UCROP_WIDGET_CROP_DRAWABLE = EXTRA_PREFIX + ".UcropToolbarCropDrawable";
 
         public static final String EXTRA_UCROP_LOGO_COLOR = EXTRA_PREFIX + ".UcropLogoColor";
 
@@ -353,111 +320,6 @@ public class UCrop {
         }
 
         /**
-         * @param show - set to true if you want to see a crop frame rectangle on top of an image
-         */
-        public void setShowCropFrame(boolean show) {
-            mOptionBundle.putBoolean(EXTRA_SHOW_CROP_FRAME, show);
-        }
-
-        /**
-         * @param color - desired color of crop frame
-         */
-        public void setCropFrameColor(@ColorInt int color) {
-            mOptionBundle.putInt(EXTRA_CROP_FRAME_COLOR, color);
-        }
-
-        /**
-         * @param width - desired width of crop frame line in pixels
-         */
-        public void setCropFrameStrokeWidth(@IntRange(from = 0) int width) {
-            mOptionBundle.putInt(EXTRA_CROP_FRAME_STROKE_WIDTH, width);
-        }
-
-        /**
-         * @param show - set to true if you want to see a crop grid/guidelines on top of an image
-         */
-        public void setShowCropGrid(boolean show) {
-            mOptionBundle.putBoolean(EXTRA_SHOW_CROP_GRID, show);
-        }
-
-        /**
-         * @param count - crop grid rows count.
-         */
-        public void setCropGridRowCount(@IntRange(from = 0) int count) {
-            mOptionBundle.putInt(EXTRA_CROP_GRID_ROW_COUNT, count);
-        }
-
-        /**
-         * @param count - crop grid columns count.
-         */
-        public void setCropGridColumnCount(@IntRange(from = 0) int count) {
-            mOptionBundle.putInt(EXTRA_CROP_GRID_COLUMN_COUNT, count);
-        }
-
-        /**
-         * @param color - desired color of crop grid/guidelines
-         */
-        public void setCropGridColor(@ColorInt int color) {
-            mOptionBundle.putInt(EXTRA_CROP_GRID_COLOR, color);
-        }
-
-        /**
-         * @param width - desired width of crop grid lines in pixels
-         */
-        public void setCropGridStrokeWidth(@IntRange(from = 0) int width) {
-            mOptionBundle.putInt(EXTRA_CROP_GRID_STROKE_WIDTH, width);
-        }
-
-        /**
-         * @param color - desired resolved color of the toolbar
-         */
-        public void setToolbarColor(@ColorInt int color) {
-            mOptionBundle.putInt(EXTRA_TOOL_BAR_COLOR, color);
-        }
-
-        /**
-         * @param color - desired resolved color of the statusbar
-         */
-        public void setStatusBarColor(@ColorInt int color) {
-            mOptionBundle.putInt(EXTRA_STATUS_BAR_COLOR, color);
-        }
-
-        /**
-         * @param color - desired resolved color of the active and selected widget (default is orange) and progress wheel middle line
-         */
-        public void setActiveWidgetColor(@ColorInt int color) {
-            mOptionBundle.putInt(EXTRA_UCROP_COLOR_WIDGET_ACTIVE, color);
-        }
-
-        /**
-         * @param color - desired resolved color of Toolbar text and buttons (default is darker orange)
-         */
-        public void setToolbarWidgetColor(@ColorInt int color) {
-            mOptionBundle.putInt(EXTRA_UCROP_WIDGET_COLOR_TOOLBAR, color);
-        }
-
-        /**
-         * @param text - desired text for Toolbar title
-         */
-        public void setToolbarTitle(@Nullable String text) {
-            mOptionBundle.putString(EXTRA_UCROP_TITLE_TEXT_TOOLBAR, text);
-        }
-
-        /**
-         * @param drawable - desired drawable for the Toolbar left cancel icon
-         */
-        public void setToolbarCancelDrawable(@DrawableRes int drawable) {
-            mOptionBundle.putInt(EXTRA_UCROP_WIDGET_CANCEL_DRAWABLE, drawable);
-        }
-
-        /**
-         * @param drawable - desired drawable for the Toolbar right crop icon
-         */
-        public void setToolbarCropDrawable(@DrawableRes int drawable) {
-            mOptionBundle.putInt(EXTRA_UCROP_WIDGET_CROP_DRAWABLE, drawable);
-        }
-
-        /**
          * @param color - desired resolved color of logo fill (default is darker grey)
          */
         public void setLogoColor(@ColorInt int color) {
@@ -522,16 +384,6 @@ public class UCrop {
             mOptionBundle.putFloat(EXTRA_ASPECT_RATIO_Y, 0);
         }
 
-        /**
-         * Set maximum size for result cropped image.
-         *
-         * @param width  max cropped image width
-         * @param height max cropped image height
-         */
-        public void withMaxResultSize(@IntRange(from = 100) int width, @IntRange(from = 100) int height) {
-            mOptionBundle.putInt(EXTRA_MAX_SIZE_X, width);
-            mOptionBundle.putInt(EXTRA_MAX_SIZE_Y, height);
-        }
 
     }
 
