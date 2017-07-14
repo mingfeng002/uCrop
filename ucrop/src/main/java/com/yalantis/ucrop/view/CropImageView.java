@@ -96,10 +96,17 @@ public class CropImageView extends TransformImageView {
         final Bitmap dst = Bitmap.createBitmap(viewportWidth, viewportHeight, config);
 
         Canvas canvas = new Canvas(dst);
-        final int left = (getRight() - viewportWidth) / 2;
-        final int top = (getBottom() - viewportHeight) / 2;
+//        final int left = (getRight() - viewportWidth) / 2;
+//        final int top = (getBottom() - viewportHeight) / 2;
+//        final int left = (- viewportWidth) / 2;
+//        final int top = (- viewportHeight) / 2;
+//        final int left =(int)mCropRect.left-viewportWidth/2 ;
+//        final int top =(int)mCropRect.top-viewportHeight / 2;
+        int x=(int)mCropRect.centerX()-viewportWidth/2;
+        int y=(int)mCropRect.centerY()-viewportHeight / 2;
 
-        canvas.translate(-left, -top);
+
+        canvas.translate(-x, -y);
 
         canvas.drawBitmap(mBitmap, mCurrentImageMatrix, null);
         return dst;

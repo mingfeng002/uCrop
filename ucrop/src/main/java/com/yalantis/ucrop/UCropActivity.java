@@ -231,8 +231,8 @@ public class UCropActivity extends AppCompatActivity {
         // Overlay view options
         mOverlayView.setFreestyleCropEnabled(intent.getBooleanExtra(UCrop.Options.EXTRA_FREE_STYLE_CROP, OverlayView.DEFAULT_FREESTYLE_CROP_MODE != OverlayView.FREESTYLE_CROP_MODE_DISABLE));
 
-        mOverlayView.setDimmedColor(intent.getIntExtra(UCrop.Options.EXTRA_DIMMED_LAYER_COLOR, getResources().getColor(R.color.ucrop_color_default_dimmed)));
-        mOverlayView.setCircleDimmedLayer(intent.getBooleanExtra(UCrop.Options.EXTRA_CIRCLE_DIMMED_LAYER, OverlayView.DEFAULT_CIRCLE_DIMMED_LAYER));
+        mOverlayView.setDimmedColor( getResources().getColor(R.color.ucrop_color_default_dimmed));
+        mOverlayView.setCircleDimmedLayer(OverlayView.DEFAULT_CIRCLE_DIMMED_LAYER);
 
         mOverlayView.setShowCropFrame(OverlayView.DEFAULT_SHOW_CROP_FRAME);
         mOverlayView.setCropFrameColor(getResources().getColor(R.color.ucrop_color_default_crop_frame));
@@ -282,8 +282,8 @@ public class UCropActivity extends AppCompatActivity {
         mToolbarCropDrawable = R.drawable.ucrop_ic_done;
         mToolbarTitle = "截图";
         mToolbarTitle = mToolbarTitle != null ? mToolbarTitle : getResources().getString(R.string.ucrop_label_edit_photo);
-        mLogoColor = intent.getIntExtra(UCrop.Options.EXTRA_UCROP_LOGO_COLOR, ContextCompat.getColor(this, R.color.ucrop_color_default_logo));
-        mShowBottomControls = !intent.getBooleanExtra(UCrop.Options.EXTRA_HIDE_BOTTOM_CONTROLS, false);
+        mLogoColor = ContextCompat.getColor(this, R.color.ucrop_color_default_logo);
+        mShowBottomControls = ! false;
         mRootViewBackgroundColor = intent.getIntExtra(UCrop.Options.EXTRA_UCROP_ROOT_VIEW_BACKGROUND_COLOR, ContextCompat.getColor(this, R.color.ucrop_color_crop_background));
 
         setupAppBar();
@@ -468,6 +468,7 @@ public class UCropActivity extends AppCompatActivity {
                 .setScrollingListener(new HorizontalProgressWheelView.ScrollingListener() {
                     @Override
                     public void onScroll(float delta, float totalDistance) {
+                         System.out.println("delta=="+delta);
                         mGestureCropImageView.postRotate(delta / ROTATE_WIDGET_SENSITIVITY_COEFFICIENT);
                     }
 

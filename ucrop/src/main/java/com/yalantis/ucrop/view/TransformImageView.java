@@ -44,7 +44,7 @@ public class TransformImageView extends ImageView {
     protected boolean mBitmapDecoded = false;
     protected boolean mBitmapLaidOut = false;
     protected Bitmap mBitmap;
-    private int mMaxBitmapSize = 0;
+//    private int mMaxBitmapSize = 0;
 //
 //    private String mImageInputPath, mImageOutputPath;
 //    private ExifInfo mExifInfo;

@@ -229,13 +229,6 @@ public class UCrop {
         public static final String EXTRA_MAX_SCALE_MULTIPLIER = EXTRA_PREFIX + ".MaxScaleMultiplier";
         public static final String EXTRA_IMAGE_TO_CROP_BOUNDS_ANIM_DURATION = EXTRA_PREFIX + ".ImageToCropBoundsAnimDuration";
 
-        public static final String EXTRA_DIMMED_LAYER_COLOR = EXTRA_PREFIX + ".DimmedLayerColor";
-        public static final String EXTRA_CIRCLE_DIMMED_LAYER = EXTRA_PREFIX + ".CircleDimmedLayer";
-
-
-        public static final String EXTRA_UCROP_LOGO_COLOR = EXTRA_PREFIX + ".UcropLogoColor";
-
-        public static final String EXTRA_HIDE_BOTTOM_CONTROLS = EXTRA_PREFIX + ".HideBottomControls";
         public static final String EXTRA_FREE_STYLE_CROP = EXTRA_PREFIX + ".FreeStyleCrop";
 
         public static final String EXTRA_ASPECT_RATIO_SELECTED_BY_DEFAULT = EXTRA_PREFIX + ".AspectRatioSelectedByDefault";
@@ -303,34 +296,6 @@ public class UCrop {
          */
         public void setMaxBitmapSize(@IntRange(from = 100) int maxBitmapSize) {
             mOptionBundle.putInt(EXTRA_MAX_BITMAP_SIZE, maxBitmapSize);
-        }
-
-        /**
-         * @param color - desired color of dimmed area around the crop bounds
-         */
-        public void setDimmedLayerColor(@ColorInt int color) {
-            mOptionBundle.putInt(EXTRA_DIMMED_LAYER_COLOR, color);
-        }
-
-        /**
-         * @param isCircle - set it to true if you want dimmed layer to have an circle inside
-         */
-        public void setCircleDimmedLayer(boolean isCircle) {
-            mOptionBundle.putBoolean(EXTRA_CIRCLE_DIMMED_LAYER, isCircle);
-        }
-
-        /**
-         * @param color - desired resolved color of logo fill (default is darker grey)
-         */
-        public void setLogoColor(@ColorInt int color) {
-            mOptionBundle.putInt(EXTRA_UCROP_LOGO_COLOR, color);
-        }
-
-        /**
-         * @param hide - set to true to hide the bottom controls (shown by default)
-         */
-        public void setHideBottomControls(boolean hide) {
-            mOptionBundle.putBoolean(EXTRA_HIDE_BOTTOM_CONTROLS, hide);
         }
 
         /**

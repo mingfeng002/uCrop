@@ -268,7 +268,6 @@ public class SampleActivity extends BaseActivity {
         }
         options.setCompressionQuality(mSeekBarQuality.getProgress());
 
-        options.setHideBottomControls(mCheckBoxHideBottomControls.isChecked());
         options.setFreeStyleCropEnabled(mCheckBoxFreeStyleCrop.isChecked());
 
         /*
